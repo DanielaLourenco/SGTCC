@@ -1,0 +1,183 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl" Namespace="Model1.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2005">
+        <EntityContainer Name="Model1TargetContainer" >
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="Model1" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="Model1Container" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Usuarios" EntityType="Model1.Usuario" />
+          <EntitySet Name="Tccs" EntityType="Model1.Tcc" />
+          <EntitySet Name="Bancas" EntityType="Model1.Banca" />
+          <EntitySet Name="MembrosBancas" EntityType="Model1.MembrosBanca" />
+          <AssociationSet Name="ProfessorMembrosBanca" Association="Model1.ProfessorMembrosBanca">
+            <End Role="Professor" EntitySet="Usuarios" />
+            <End Role="MembrosBanca" EntitySet="MembrosBancas" />
+          </AssociationSet>
+          <AssociationSet Name="BancaMembrosBanca" Association="Model1.BancaMembrosBanca">
+            <End Role="Banca" EntitySet="Bancas" />
+            <End Role="MembrosBanca" EntitySet="MembrosBancas" />
+          </AssociationSet>
+          <EntitySet Name="Arquivoes" EntityType="Model1.Arquivo" />
+          <AssociationSet Name="TccArquivo" Association="Model1.TccArquivo">
+            <End Role="Tcc" EntitySet="Tccs" />
+            <End Role="Arquivo" EntitySet="Arquivoes" />
+          </AssociationSet>
+          <EntitySet Name="CronogramaArquivoes" EntityType="Model1.CronogramaArquivo" />
+          <EntitySet Name="CronogramaAgendamentoes" EntityType="Model1.CronogramaAgendamento" />
+          <AssociationSet Name="ProfessorTcc" Association="Model1.ProfessorTcc">
+            <End Role="Professor" EntitySet="Usuarios" />
+            <End Role="Tcc" EntitySet="Tccs" />
+          </AssociationSet>
+          <AssociationSet Name="BancaTcc2" Association="Model1.BancaTcc2">
+            <End Role="Banca" EntitySet="Bancas" />
+            <End Role="Tcc2" EntitySet="Tccs" />
+          </AssociationSet>
+          <AssociationSet Name="AlunoTcc" Association="Model1.AlunoTcc">
+            <End Role="Aluno" EntitySet="Usuarios" />
+            <End Role="Tcc" EntitySet="Tccs" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nome" Nullable="false" Type="String" />
+          <Property Name="cpf" Type="String" Nullable="false" />
+          <Property Name="email" Type="String" Nullable="false" />
+          <Property Name="telefone" Type="String" Nullable="false" />
+          <Property Name="senha" Type="String" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Aluno" BaseType="Model1.Usuario">
+          <Property Name="matricula" Type="String" Nullable="false" />
+          <NavigationProperty Name="Tccs" Relationship="Model1.AlunoTcc" FromRole="Aluno" ToRole="Tcc" />
+        </EntityType>
+        <EntityType Name="Professor" BaseType="Model1.Usuario">
+          <Property Name="instituicao" Type="String" Nullable="false" />
+          <Property Name="tipo" Type="String" Nullable="false" />
+          <NavigationProperty Name="MembrosBancas" Relationship="Model1.ProfessorMembrosBanca" FromRole="Professor" ToRole="MembrosBanca" />
+          <NavigationProperty Name="Tccs" Relationship="Model1.ProfessorTcc" FromRole="Professor" ToRole="Tcc" />
+        </EntityType>
+        <EntityType Name="Tcc">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" Type="Int32" />
+          <Property Name="titulo" Type="String" Nullable="false" />
+          <Property Name="semestre" Type="String" Nullable="false" />
+          <Property Name="ano" Type="String" Nullable="false" />
+          <Property Name="status" Type="String" Nullable="false" />
+          <NavigationProperty Name="Arquivoes" Relationship="Model1.TccArquivo" FromRole="Tcc" ToRole="Arquivo" />
+          <NavigationProperty Name="Professor" Relationship="Model1.ProfessorTcc" FromRole="Tcc" ToRole="Professor" />
+          <NavigationProperty Name="Aluno" Relationship="Model1.AlunoTcc" FromRole="Tcc" ToRole="Aluno" />
+        </EntityType>
+        <EntityType Name="Tcc2" BaseType="Model1.Tcc">
+          <Property Name="data" Type="String" Nullable="false" />
+          <Property Name="local" Type="String" Nullable="false" />
+          <NavigationProperty Name="Banca" Relationship="Model1.BancaTcc2" FromRole="Tcc2" ToRole="Banca" />
+        </EntityType>
+        <EntityType Name="Banca">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="MembrosBancas" Relationship="Model1.BancaMembrosBanca" FromRole="Banca" ToRole="MembrosBanca" />
+          <NavigationProperty Name="Tcc2" Relationship="Model1.BancaTcc2" FromRole="Banca" ToRole="Tcc2" />
+        </EntityType>
+        <EntityType Name="MembrosBanca">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Professor" Relationship="Model1.ProfessorMembrosBanca" FromRole="MembrosBanca" ToRole="Professor" />
+          <NavigationProperty Name="Banca" Relationship="Model1.BancaMembrosBanca" FromRole="MembrosBanca" ToRole="Banca" />
+        </EntityType>
+        <Association Name="ProfessorMembrosBanca">
+          <End Type="Model1.Professor" Role="Professor" Multiplicity="1" />
+          <End Type="Model1.MembrosBanca" Role="MembrosBanca" Multiplicity="*" />
+        </Association>
+        <Association Name="BancaMembrosBanca">
+          <End Type="Model1.Banca" Role="Banca" Multiplicity="1" />
+          <End Type="Model1.MembrosBanca" Role="MembrosBanca" Multiplicity="*" />
+        </Association>
+        <EntityType Name="Arquivo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nome" Type="String" Nullable="false" />
+          <Property Name="extensao" Type="String" Nullable="false" />
+          <Property Name="caminho" Type="String" Nullable="false" />
+          <NavigationProperty Name="Tcc" Relationship="Model1.TccArquivo" FromRole="Arquivo" ToRole="Tcc" />
+        </EntityType>
+        <Association Name="TccArquivo">
+          <End Type="Model1.Tcc" Role="Tcc" Multiplicity="1" />
+          <End Type="Model1.Arquivo" Role="Arquivo" Multiplicity="*" />
+        </Association>
+        <EntityType Name="CronogramaArquivo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="prazoInicial" Type="String" Nullable="false" />
+          <Property Name="prazoFinal" Type="String" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CronogramaAgendamento">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="prazoInicial" Type="String" Nullable="false" />
+          <Property Name="prazoFinal" Type="String" Nullable="false" />
+        </EntityType>
+        <Association Name="ProfessorTcc">
+          <End Type="Model1.Professor" Role="Professor" Multiplicity="1" />
+          <End Type="Model1.Tcc" Role="Tcc" Multiplicity="*" />
+        </Association>
+        <Association Name="BancaTcc2">
+          <End Type="Model1.Banca" Role="Banca" Multiplicity="1" />
+          <End Type="Model1.Tcc2" Role="Tcc2" Multiplicity="*" />
+        </Association>
+        <Association Name="AlunoTcc">
+          <End Type="Model1.Aluno" Role="Aluno" Multiplicity="1" />
+          <End Type="Model1.Tcc" Role="Tcc" Multiplicity="*" />
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs" Space="C-S">
+        <Alias Key="Model" Value="Model1" />
+        <Alias Key="Target" Value="Model1.Store" />
+        <EntityContainerMapping CdmEntityContainer="Model1Container" StorageEntityContainer="Model1TargetContainer">
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
