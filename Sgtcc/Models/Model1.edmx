@@ -4,11 +4,257 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl" Namespace="Model1.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2005">
-        <EntityContainer Name="Model1TargetContainer" >
-        </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+    <Schema Namespace="Model1.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="Model1StoreContainer">
+    <EntitySet Name="Usuarios" EntityType="Model1.Store.Usuarios" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Tccs" EntityType="Model1.Store.Tccs" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Bancas" EntityType="Model1.Store.Bancas" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="MembrosBancas" EntityType="Model1.Store.MembrosBancas" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Arquivoes" EntityType="Model1.Store.Arquivoes" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CronogramaArquivoes" EntityType="Model1.Store.CronogramaArquivoes" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CronogramaAgendamentoes" EntityType="Model1.Store.CronogramaAgendamentoes" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Usuarios_Professor" EntityType="Model1.Store.Usuarios_Professor" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Tccs_Tcc2" EntityType="Model1.Store.Tccs_Tcc2" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Usuarios_Aluno" EntityType="Model1.Store.Usuarios_Aluno" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="ProfessorMembrosBanca" Association="Model1.Store.ProfessorMembrosBanca">
+      <End Role="Professor" EntitySet="Usuarios_Professor" />
+      <End Role="MembrosBanca" EntitySet="MembrosBancas" />
+    </AssociationSet>
+    <AssociationSet Name="BancaMembrosBanca" Association="Model1.Store.BancaMembrosBanca">
+      <End Role="Banca" EntitySet="Bancas" />
+      <End Role="MembrosBanca" EntitySet="MembrosBancas" />
+    </AssociationSet>
+    <AssociationSet Name="TccArquivo" Association="Model1.Store.TccArquivo">
+      <End Role="Tcc" EntitySet="Tccs" />
+      <End Role="Arquivo" EntitySet="Arquivoes" />
+    </AssociationSet>
+    <AssociationSet Name="ProfessorTcc" Association="Model1.Store.ProfessorTcc">
+      <End Role="Professor" EntitySet="Usuarios_Professor" />
+      <End Role="Tcc" EntitySet="Tccs" />
+    </AssociationSet>
+    <AssociationSet Name="BancaTcc2" Association="Model1.Store.BancaTcc2">
+      <End Role="Banca" EntitySet="Bancas" />
+      <End Role="Tcc2" EntitySet="Tccs_Tcc2" />
+    </AssociationSet>
+    <AssociationSet Name="AlunoTcc" Association="Model1.Store.AlunoTcc">
+      <End Role="Aluno" EntitySet="Usuarios_Aluno" />
+      <End Role="Tcc" EntitySet="Tccs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Professor_inherits_Usuario" Association="Model1.Store.FK_Professor_inherits_Usuario">
+      <End Role="Usuario" EntitySet="Usuarios" />
+      <End Role="Professor" EntitySet="Usuarios_Professor" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Tcc2_inherits_Tcc" Association="Model1.Store.FK_Tcc2_inherits_Tcc">
+      <End Role="Tcc" EntitySet="Tccs" />
+      <End Role="Tcc2" EntitySet="Tccs_Tcc2" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Aluno_inherits_Usuario" Association="Model1.Store.FK_Aluno_inherits_Usuario">
+      <End Role="Usuario" EntitySet="Usuarios" />
+      <End Role="Aluno" EntitySet="Usuarios_Aluno" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Usuarios">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nome" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="cpf" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="email" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="telefone" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="senha" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Tccs">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="titulo" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="semestre" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ano" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="status" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Professor_Id" Type="int" Nullable="false" />
+    <Property Name="Aluno_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Bancas">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <EntityType Name="MembrosBancas">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Professor_Id" Type="int" Nullable="false" />
+    <Property Name="Banca_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Arquivoes">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nome" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="extensao" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="caminho" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Tcc_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CronogramaArquivoes">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="prazoInicial" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="prazoFinal" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CronogramaAgendamentoes">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="prazoInicial" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="prazoFinal" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Usuarios_Professor">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="instituicao" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="tipo" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Tccs_Tcc2">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="data" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="local" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Banca_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Usuarios_Aluno">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="matricula" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Id" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="ProfessorMembrosBanca">
+    <End Role="Professor" Type="Model1.Store.Usuarios_Professor" Multiplicity="1" />
+    <End Role="MembrosBanca" Type="Model1.Store.MembrosBancas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Professor">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MembrosBanca">
+        <PropertyRef Name="Professor_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="BancaMembrosBanca">
+    <End Role="Banca" Type="Model1.Store.Bancas" Multiplicity="1" />
+    <End Role="MembrosBanca" Type="Model1.Store.MembrosBancas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Banca">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MembrosBanca">
+        <PropertyRef Name="Banca_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="TccArquivo">
+    <End Role="Tcc" Type="Model1.Store.Tccs" Multiplicity="1" />
+    <End Role="Arquivo" Type="Model1.Store.Arquivoes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tcc">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Arquivo">
+        <PropertyRef Name="Tcc_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ProfessorTcc">
+    <End Role="Professor" Type="Model1.Store.Usuarios_Professor" Multiplicity="1" />
+    <End Role="Tcc" Type="Model1.Store.Tccs" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Professor">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Tcc">
+        <PropertyRef Name="Professor_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="BancaTcc2">
+    <End Role="Banca" Type="Model1.Store.Bancas" Multiplicity="1" />
+    <End Role="Tcc2" Type="Model1.Store.Tccs_Tcc2" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Banca">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Tcc2">
+        <PropertyRef Name="Banca_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="AlunoTcc">
+    <End Role="Aluno" Type="Model1.Store.Usuarios_Aluno" Multiplicity="1" />
+    <End Role="Tcc" Type="Model1.Store.Tccs" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Aluno">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Tcc">
+        <PropertyRef Name="Aluno_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Professor_inherits_Usuario">
+    <End Role="Usuario" Type="Model1.Store.Usuarios" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Professor" Type="Model1.Store.Usuarios_Professor" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Professor">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Tcc2_inherits_Tcc">
+    <End Role="Tcc" Type="Model1.Store.Tccs" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Tcc2" Type="Model1.Store.Tccs_Tcc2" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Tcc">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Tcc2">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Aluno_inherits_Usuario">
+    <End Role="Usuario" Type="Model1.Store.Usuarios" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Aluno" Type="Model1.Store.Usuarios_Aluno" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Aluno">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="Model1" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
@@ -154,13 +400,143 @@
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
-      <Mapping xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs" Space="C-S">
-        <Alias Key="Model" Value="Model1" />
-        <Alias Key="Target" Value="Model1.Store" />
-        <EntityContainerMapping CdmEntityContainer="Model1Container" StorageEntityContainer="Model1TargetContainer">
-        </EntityContainerMapping>
-      </Mapping>
-    </edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Model1StoreContainer" CdmEntityContainer="Model1Container">
+    <EntitySetMapping Name="Usuarios">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Usuario)">
+        <MappingFragment StoreEntitySet="Usuarios">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="nome" ColumnName="nome" />
+          <ScalarProperty Name="cpf" ColumnName="cpf" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="telefone" ColumnName="telefone" />
+          <ScalarProperty Name="senha" ColumnName="senha" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Professor)">
+        <MappingFragment StoreEntitySet="Usuarios_Professor">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="instituicao" ColumnName="instituicao" />
+          <ScalarProperty Name="tipo" ColumnName="tipo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Aluno)">
+        <MappingFragment StoreEntitySet="Usuarios_Aluno">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="matricula" ColumnName="matricula" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tccs">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Tcc)">
+        <MappingFragment StoreEntitySet="Tccs">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="titulo" ColumnName="titulo" />
+          <ScalarProperty Name="semestre" ColumnName="semestre" />
+          <ScalarProperty Name="ano" ColumnName="ano" />
+          <ScalarProperty Name="status" ColumnName="status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Tcc2)">
+        <MappingFragment StoreEntitySet="Tccs_Tcc2">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="data" ColumnName="data" />
+          <ScalarProperty Name="local" ColumnName="local" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Bancas">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Banca)">
+        <MappingFragment StoreEntitySet="Bancas">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MembrosBancas">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.MembrosBanca)">
+        <MappingFragment StoreEntitySet="MembrosBancas">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Arquivoes">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Arquivo)">
+        <MappingFragment StoreEntitySet="Arquivoes">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="nome" ColumnName="nome" />
+          <ScalarProperty Name="extensao" ColumnName="extensao" />
+          <ScalarProperty Name="caminho" ColumnName="caminho" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CronogramaArquivoes">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.CronogramaArquivo)">
+        <MappingFragment StoreEntitySet="CronogramaArquivoes">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="prazoInicial" ColumnName="prazoInicial" />
+          <ScalarProperty Name="prazoFinal" ColumnName="prazoFinal" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CronogramaAgendamentoes">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.CronogramaAgendamento)">
+        <MappingFragment StoreEntitySet="CronogramaAgendamentoes">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="prazoInicial" ColumnName="prazoInicial" />
+          <ScalarProperty Name="prazoFinal" ColumnName="prazoFinal" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="ProfessorMembrosBanca" TypeName="Model1.ProfessorMembrosBanca" StoreEntitySet="MembrosBancas">
+      <EndProperty Name="Professor">
+        <ScalarProperty Name="Id" ColumnName="Professor_Id" />
+      </EndProperty>
+      <EndProperty Name="MembrosBanca">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="BancaMembrosBanca" TypeName="Model1.BancaMembrosBanca" StoreEntitySet="MembrosBancas">
+      <EndProperty Name="Banca">
+        <ScalarProperty Name="Id" ColumnName="Banca_Id" />
+      </EndProperty>
+      <EndProperty Name="MembrosBanca">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="TccArquivo" TypeName="Model1.TccArquivo" StoreEntitySet="Arquivoes">
+      <EndProperty Name="Tcc">
+        <ScalarProperty Name="Id" ColumnName="Tcc_Id" />
+      </EndProperty>
+      <EndProperty Name="Arquivo">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="ProfessorTcc" TypeName="Model1.ProfessorTcc" StoreEntitySet="Tccs">
+      <EndProperty Name="Professor">
+        <ScalarProperty Name="Id" ColumnName="Professor_Id" />
+      </EndProperty>
+      <EndProperty Name="Tcc">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="BancaTcc2" TypeName="Model1.BancaTcc2" StoreEntitySet="Tccs_Tcc2">
+      <EndProperty Name="Banca">
+        <ScalarProperty Name="Id" ColumnName="Banca_Id" />
+      </EndProperty>
+      <EndProperty Name="Tcc2">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="AlunoTcc" TypeName="Model1.AlunoTcc" StoreEntitySet="Tccs">
+      <EndProperty Name="Aluno">
+        <ScalarProperty Name="Id" ColumnName="Aluno_Id" />
+      </EndProperty>
+      <EndProperty Name="Tcc">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
   </edmx:Runtime>
   <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
@@ -174,6 +550,7 @@
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
         <DesignerProperty Name="EnablePluralization" Value="True" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
       </DesignerInfoPropertySet>
     </edmx:Options>
     <!-- Diagram content (shape and connector positions) -->
