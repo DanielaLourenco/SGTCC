@@ -20,10 +20,11 @@ namespace Sgtcc.Models
         public Aluno()
         {
             this.Tccs = new HashSet<Tcc>();
-        }
+        }      
+
         [Required]
-        [Display(Name = "Matrícula")]        
-        [StringLength(12)]
+        [Display(Name = "Matrícula")]
+        [RegularExpression("^[0-9]{12}$", ErrorMessage = "Matrícula must have 12 digits.")]
         public string matricula { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

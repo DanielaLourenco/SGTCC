@@ -201,6 +201,8 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AlunosController.cs" />
+    <Compile Include="Controllers\CronogramaAgendamentosController.cs" />
+    <Compile Include="Controllers\CronogramaArquivosController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ProfessoresController.cs" />
@@ -390,6 +392,16 @@
     <Content Include="Views\Professores\Details.cshtml" />
     <Content Include="Views\Professores\Edit.cshtml" />
     <Content Include="Views\Professores\Index.cshtml" />
+    <Content Include="Views\CronogramaArquivos\Create.cshtml" />
+    <Content Include="Views\CronogramaArquivos\Delete.cshtml" />
+    <Content Include="Views\CronogramaArquivos\Details.cshtml" />
+    <Content Include="Views\CronogramaArquivos\Edit.cshtml" />
+    <Content Include="Views\CronogramaArquivos\Index.cshtml" />
+    <Content Include="Views\CronogramaAgendamentos\Create.cshtml" />
+    <Content Include="Views\CronogramaAgendamentos\Delete.cshtml" />
+    <Content Include="Views\CronogramaAgendamentos\Details.cshtml" />
+    <Content Include="Views\CronogramaAgendamentos\Edit.cshtml" />
+    <Content Include="Views\CronogramaAgendamentos\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
