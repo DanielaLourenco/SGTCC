@@ -1,12 +1,43 @@
 ﻿@model IEnumerable<Sgtcc.Models.Tcc>
+@using GridMvc.Html
 
 @{
     ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section css {
+    <link href="@Url.Content("~/Content/Gridmvc.css")" rel="stylesheet" type="text/css" />
 }
 
 <h2>Listagem de TCCs</h2>
 
-<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Pesquisar por aluno" title="Digite um Id">
+<link href="@Url.Content("~/Content/Gridmvc.css")" rel="stylesheet" type="text/css" />
+<link href="@Url.Content("~/Content/bootstrap.min.css")" rel="stylesheet" type="text/css" />
+<script src="@Url.Content("~/Scripts/jquery-1.9.1.min.js")"></script>
+<script src="@Url.Content("~/Scripts/gridmvc.min.js")"></script>
+
+<div>
+    @Html.Grid(Model).Columns(columns =>
+{
+    columns.Add(c => c.Aluno.nome).Titled("Aluno").Filterable(true);
+    columns.Add(c => c.titulo).Titled("Título").Filterable(true);
+    columns.Add(c => c.Professor.nome).Titled("Professor").Filterable(true);
+    columns.Add(c => c.ano).Titled("Ano").Filterable(true);
+    columns.Add()
+    .Encoded(false)
+    .Sanitized(false)
+    .SetWidth(30)
+    .RenderValueAs(o => Html.ActionLink("Details", "Details", new { id = o.Id }));
+
+}).WithPaging(10).Sortable(true).Filterable(true).WithMultipleFilters()
+</div>
+
+@section Scripts {
+    <script src="@Url.Content("~/Scripts/gridmvc.min.js")" type="text/javascript"> </script>
+}
+
+@*<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Pesquisar por aluno" title="Digite um Id">
 <table id="table" class="table table-bordered table-striped">
     <tr>
         <th>
@@ -66,3 +97,4 @@
     }
 
 </table>
+*@

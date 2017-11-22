@@ -45,6 +45,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="GridMvc, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Grid.Mvc.3.0.0\lib\net40\GridMvc.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.AI.Agent.Intercept, Version=2.0.6.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.2.0.6\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
       <Private>True</Private>
@@ -78,6 +81,12 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Entity" />
@@ -200,6 +209,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AgendamentoController.cs" />
     <Compile Include="Controllers\AlunosController.cs" />
     <Compile Include="Controllers\CronogramaAgendamentosController.cs" />
     <Compile Include="Controllers\CronogramaArquivosController.cs" />
@@ -207,6 +217,8 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ProfessoresController.cs" />
     <Compile Include="Controllers\BuscaTccsController.cs" />
+    <Compile Include="Controllers\Tcc2Controller.cs" />
+    <Compile Include="Controllers\TccController.cs" />
     <Compile Include="Controllers\UsuariosController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -280,6 +292,8 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Gridmvc.css" />
+    <Content Include="Content\PagedList.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -327,7 +341,11 @@
     <Content Include="Models\Model1.edmx.diagram">
       <DependentUpon>Model1.edmx</DependentUpon>
     </Content>
+    <Content Include="Grid.mvc.readme" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\gridmvc.js" />
+    <Content Include="Scripts\gridmvc.lang.ru.js" />
+    <Content Include="Scripts\gridmvc.min.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -983,6 +1001,20 @@
     <Content Include="Views\public\bower_components\font-awesome\_bower.json" />
     <Content Include="Views\public\bower_components\font-awesome\_gitignore" />
     <Content Include="Views\public\bower_components\font-awesome\_npmignore" />
+    <Content Include="Views\Tcc\Create.cshtml" />
+    <Content Include="Views\Tcc\Delete.cshtml" />
+    <Content Include="Views\Tcc\Details.cshtml" />
+    <Content Include="Views\Tcc\Edit.cshtml" />
+    <Content Include="Views\Tcc\Index.cshtml" />
+    <Content Include="Views\Tcc2\Create.cshtml" />
+    <Content Include="Views\Tcc2\Delete.cshtml" />
+    <Content Include="Views\Tcc2\Details.cshtml" />
+    <Content Include="Views\Tcc2\Edit.cshtml" />
+    <Content Include="Views\Tcc2\Index.cshtml" />
+    <Content Include="Views\Agendamento\Details.cshtml" />
+    <Content Include="Views\Agendamento\Index.cshtml" />
+    <Content Include="Views\Shared\_GridPager.cshtml" />
+    <Content Include="Views\Shared\_Grid.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

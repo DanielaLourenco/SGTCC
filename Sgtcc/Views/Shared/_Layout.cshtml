@@ -40,6 +40,8 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - SGTCC</title>
+    <link rel="stylesheet" href="~/Content/bootstrap.css" />
+    @RenderSection("css", required: false)
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
@@ -57,14 +59,17 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Sobre", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contato", "Contact", "Home")</li>
+                    @*<li>@Html.ActionLink("Sobre", "About", "Home")</li>
+                    <li>@Html.ActionLink("Contato", "Contact", "Home")</li>*@
                     <li>@Html.ActionLink("Usuário", "../Usuarios", "Index")</li>
                     <li>@Html.ActionLink("Aluno", "../Alunos", "Index")</li>
                     <li>@Html.ActionLink("Professor", "../Professores", "Index")</li>
-                    <li>@Html.ActionLink("Cronograma de Submissão", "../CronogramaArquivos", "Index")</li>
-                    <li>@Html.ActionLink("Cronograma de Agendamento", "../CronogramaAgendamentos", "Index")</li>
+                    <li>@Html.ActionLink("TCC 1", "../Tcc", "Index")</li>
+                    <li>@Html.ActionLink("TCC 2", "../Tcc2", "Index")</li>
+                    @*<li>@Html.ActionLink("Cronograma de Submissão", "../CronogramaArquivos", "Index")</li>
+                    <li>@Html.ActionLink("Cronograma de Agendamento", "../CronogramaAgendamentos", "Index")</li>*@
                     <li>@Html.ActionLink("Buscar TCC", "../BuscaTccs", "Index")</li>
+                    <li>@Html.ActionLink("Buscar Agendamento", "../Agendamento", "Index")</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
@@ -100,5 +105,7 @@
             }
         }
     </script>
+    <script src="~/Scripts/jquery-1.9.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
 </body>
 </html>

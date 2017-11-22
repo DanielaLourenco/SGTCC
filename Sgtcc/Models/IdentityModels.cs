@@ -21,7 +21,7 @@ namespace Sgtcc.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
+            : base("Model1Container", throwIfV1Schema: false)
         {
         }
 

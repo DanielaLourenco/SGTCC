@@ -1,0 +1,66 @@
+﻿@model Sgtcc.Models.Tcc2
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Tcc2</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.titulo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.titulo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.semestre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.semestre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ano)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ano)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.status)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.data)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.data)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.local)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.local)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
