@@ -15,14 +15,14 @@ namespace Sgtcc.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
+            ViewBag.Message = "SGTCC - Sistema de gerenciamento de Trabalhos de Conclusão de Curso.";
 
             return View();
         }
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
+            ViewBag.Message = "SGTCC - Contato.";
 
             return View();
         }

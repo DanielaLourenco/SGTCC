@@ -1,0 +1,68 @@
+﻿@model IEnumerable<Sgtcc.Models.Tcc>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Listagem de TCCs</h2>
+
+<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Pesquisar por aluno" title="Digite um Id">
+<table id="table" class="table table-bordered table-striped">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Aluno)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Professor)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.titulo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.semestre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ano)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.status)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Aluno.nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Professor.nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.titulo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.semestre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ano)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.status)
+            </td>
+
+            <td>
+                @Html.ActionLink("Download", "../Home/Index") |
+                @Html.ActionLink("Details", "Details", new { id = item.Id })
+            </td>
+        </tr>
+    }
+
+</table>

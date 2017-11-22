@@ -1,0 +1,14 @@
+.sidebar-nav {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding: 5;
+  list-style: none;
+}
+
+.detalhes{
+  margin: 3rem;
+  padding: 3rem;
+  border: 0.1rem solid black;
+  border-radius: 1rem;
+  background-color: whitesmoke;
+}
