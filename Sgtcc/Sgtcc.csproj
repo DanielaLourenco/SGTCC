@@ -211,6 +211,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AgendamentoController.cs" />
     <Compile Include="Controllers\AlunosController.cs" />
+    <Compile Include="Controllers\ArquivoController.cs" />
     <Compile Include="Controllers\CronogramaAgendamentosController.cs" />
     <Compile Include="Controllers\CronogramaArquivosController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -1017,9 +1018,17 @@
     <Content Include="Views\Shared\_GridPager.cshtml" />
     <Content Include="Views\Shared\_Grid.cshtml" />
     <Content Include="Views\Login\Index.cshtml" />
+    <Content Include="Views\Home\IndexAluno.cshtml" />
+    <Content Include="Views\Home\IndexProfessor.cshtml" />
+    <Content Include="Views\Shared\_LayoutAluno.cshtml" />
+    <Content Include="Views\Shared\_LayoutProfessor.cshtml" />
+    <Content Include="Views\Arquivo\Index.cshtml" />
+    <Content Include="Views\Home\IndexAdmin.cshtml" />
+    <Content Include="Views\Shared\_LayoutAdmin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Arquivos\" />
     <Folder Include="Views\public\bower_components\bootstrap-daterangepicker\" />
     <Folder Include="Views\public\bower_components\bootstrap-slider\" />
     <Folder Include="Views\public\bower_components\bootstrap-timepicker\" />

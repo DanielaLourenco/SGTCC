@@ -13,6 +13,21 @@ namespace Sgtcc.Controllers
             return View();
         }
 
+        public ActionResult IndexAluno()
+        {
+            return View();
+        }
+
+        public ActionResult IndexProfessor()
+        {
+            return View();
+        }
+
+        public ActionResult IndexAdmin()
+        {
+            return View();
+        }
+
         public ActionResult About()
         {
             ViewBag.Message = "SGTCC - Sistema de gerenciamento de Trabalhos de Conclusão de Curso.";
