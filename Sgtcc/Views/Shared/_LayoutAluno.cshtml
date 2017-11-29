@@ -55,14 +55,12 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("SGTCC", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("SGTCC", "IndexAluno", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    @*<li>@Html.ActionLink("Sobre", "About", "Home")</li>
-                        <li>@Html.ActionLink("Contato", "Contact", "Home")</li>*@
-                    <li>@Html.ActionLink("TCC 1", "../Tcc", "Index")</li>
-                    <li>@Html.ActionLink("TCC 2", "../Tcc2", "Index")</li>
+                    <li>@Html.ActionLink("Editar Perfil", "../Aluno", "Edit", new { id = (int)Session["userID"] })</li>
+                    <li>@Html.ActionLink("Submeter TCC 1", "../Arquivo", "Index")</li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li><a> Bem vindo @Session["userName"].ToString()</a></li>
@@ -75,7 +73,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            <p>&copy; @DateTime.Now.Year - ASP.NET Application - SGTCC</p>
         </footer>
     </div>
 

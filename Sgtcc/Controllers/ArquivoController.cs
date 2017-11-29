@@ -23,7 +23,12 @@ namespace Sgtcc.Controllers
         public ActionResult UploadFile(HttpPostedFileBase UploadedFile)
         {
 
-            if (UploadedFile.ContentLength > 0)
+            var dadosAluno = db.Alunos.Where((Sgtcc.Models.Aluno a) => a.Id == (int)HttpContext.Session["userID"]).FirstOrDefault();
+            if (dadosAluno.Tccs != null)
+            {
+                return null;
+            }
+            else if (UploadedFile.ContentLength > 0)
             {
                 string fileName = Path.GetFileName(UploadedFile.FileName);
                 string folderPath = Path.Combine(Server.MapPath("~/Arquivos"), fileName);
