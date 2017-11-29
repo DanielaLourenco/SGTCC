@@ -11,11 +11,13 @@ namespace Sgtcc.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.Web;
+
     public partial class Arquivo
     {
         public int Id { get; set; }
         public string nome { get; set; }
+
         public string extensao { get; set; }
         public string caminho { get; set; }
     
