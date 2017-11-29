@@ -6,6 +6,7 @@
 //     Manual changes to this file will be overwritten if the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
+using System.ComponentModel.DataAnnotations;
 
 namespace Sgtcc.Models
 {
@@ -21,6 +22,8 @@ namespace Sgtcc.Models
         }
     
         public int Id { get; set; }
+        [Required]
+        [Display(Name = "Título")]
         public string titulo { get; set; }
         public string semestre { get; set; }
         public string ano { get; set; }

@@ -46,10 +46,13 @@ namespace Sgtcc.Controllers
         // obter mais detalhes, consulte https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,titulo,semestre,ano,status")] Tcc tcc)
+        public ActionResult Create([Bind(Include = "Id,titulo,Professor.nome")] Tcc tcc)
         {
             if (ModelState.IsValid)
             {
+                DateTime dataAtual = DateTime.Now;
+                tcc.semestre = (dataAtual.Month <= 6 ? 1 : 2).ToString();
+                tcc.ano = (dataAtual.Year).ToString();
                 db.Tccs.Add(tcc);
                 db.SaveChanges();
                 return RedirectToAction("Index");
