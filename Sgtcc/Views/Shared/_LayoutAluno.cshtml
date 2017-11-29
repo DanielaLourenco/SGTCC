@@ -61,19 +61,12 @@
                 <ul class="nav navbar-nav">
                     @*<li>@Html.ActionLink("Sobre", "About", "Home")</li>
                         <li>@Html.ActionLink("Contato", "Contact", "Home")</li>*@
-                    <li>@Html.ActionLink("Usuário", "../Usuarios", "Index")</li>
-                    <li>@Html.ActionLink("Aluno", "../Alunos", "Index")</li>
-                    <li>@Html.ActionLink("Professor", "../Professores", "Index")</li>
                     <li>@Html.ActionLink("TCC 1", "../Tcc", "Index")</li>
                     <li>@Html.ActionLink("TCC 2", "../Tcc2", "Index")</li>
-                    @*<li>@Html.ActionLink("Cronograma de Submissão", "../CronogramaArquivos", "Index")</li>
-                        <li>@Html.ActionLink("Cronograma de Agendamento", "../CronogramaAgendamentos", "Index")</li>*@
-                    <li>@Html.ActionLink("Buscar TCC", "../BuscaTccs", "Index")</li>
-                    <li>@Html.ActionLink("Buscar Agendamento", "../Agendamento", "Index")</li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li><a> Bem vindo @Session["userName"].ToString()</a></li>
-                    <li><a href="@Url.Action("LogOut","Login")">LogOut</a></li>
+                    <li><a href="@Url.Action("LogOut", "Login")">LogOut</a></li>
                 </ul>
             </div>
         </div>

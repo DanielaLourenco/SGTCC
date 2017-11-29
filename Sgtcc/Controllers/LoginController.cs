@@ -26,7 +26,7 @@ namespace Sgtcc.Controllers
                     usuarioModel.LoginErrorMessage = "CPF ou senha inválidos";
                     return View("Index", usuarioModel);
                 }
-                else if( db.Alunos.Where((Sgtcc.Models.Aluno a) => a.Id == usuarioModel.Id).FirstOrDefault() != null)
+                else if (db.Alunos.Where((Sgtcc.Models.Aluno a) => a.Id == usuarioModel.Id).FirstOrDefault() != null)
                 {   // aluno
                     Session["userID"] = usuarioModel.Id;
                     Session["userName"] = usuarioModel.nome;
