@@ -8,7 +8,8 @@
 //------------------------------------------------------------------------------
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Web.Mvc;
 namespace Sgtcc.Models
 {
     using System;
@@ -35,14 +36,23 @@ namespace Sgtcc.Models
 
         [Required]
         [Display(Name = "Telefone")]
+        [RegularExpression("^[0-9]{8,15}$", ErrorMessage = "Phone number must have from 8 to 15 digits.")]
         [DataType(DataType.PhoneNumber)]
         public string telefone { get; set; }
 
         [Required]
         [Display(Name = "Senha")]
+        [RegularExpression("^(?=.{8,})(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=.?!]).*$", ErrorMessage = "Password must have at least 8 characters and a upper case, lower case and a special character.")]
         [DataType(DataType.Password)]        
         public string senha { get; set; }
-
+        /*
+        [NotMapped] // Nao afeta o banco
+        [Display(Name = "Confirmar Senha")]        
+        [Compare("senha",
+                    ErrorMessage = "The password and confirmation password do not match.")]
+        [DataType(DataType.Password)]
+        public string confirmPassword { get; set; }
+        */
         public string LoginErrorMessage { get; set; }
     }
 }
