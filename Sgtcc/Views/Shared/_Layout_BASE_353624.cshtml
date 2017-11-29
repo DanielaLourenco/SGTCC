@@ -57,8 +57,6 @@
                 </button>
                 @Html.ActionLink("SGTCC", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
-<<<<<<< HEAD
-=======
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     @*<li>@Html.ActionLink("Sobre", "About", "Home")</li>
@@ -72,18 +70,17 @@
                     <li>@Html.ActionLink("Cronograma de Agendamento", "../CronogramaAgendamentos", "Index")</li>*@
                     <li>@Html.ActionLink("Buscar TCC", "../BuscaTccs", "Index")</li>
                     <li>@Html.ActionLink("Buscar Agendamento", "../Agendamento", "Index")</li>
-                    
+                    <li>@Html.ActionLink("Notificar Alunos", "../Notificacoes", "Index")</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
->>>>>>> 6fa326f91d3bc0dfc98f50c2c672d98c2b846d5d
         </div>
     </div>
     <div class="container body-content">
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - ASP.NET Application - SGTCC</p>
+            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
         </footer>
     </div>
 
