@@ -1,0 +1,26 @@
+﻿@model Sgtcc.Models.Arquivo
+
+@{
+    ViewBag.Title = "Arquivo";
+}
+
+<h2>Arquivo</h2>
+
+
+@using (Html.BeginForm("UploadFile", "Arquivo", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+
+    <div >
+        @Html.TextBox("UploadedFile", "", new { type = "file"} );
+
+        <input type="submit" value="Upload" />
+
+        @{ 
+            if(ViewBag.Message != null)
+            {
+                @ViewBag.Message
+            }
+        }
+    </div>
+
+}

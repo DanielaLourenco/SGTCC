@@ -42,5 +42,7 @@ namespace Sgtcc.Models
         [Display(Name = "Senha")]
         [DataType(DataType.Password)]        
         public string senha { get; set; }
+
+        public string LoginErrorMessage { get; set; }
     }
 }
