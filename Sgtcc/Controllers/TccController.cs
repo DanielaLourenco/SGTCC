@@ -38,6 +38,14 @@ namespace Sgtcc.Controllers
         // GET: Tcc/Create
         public ActionResult Create()
         {
+            /*var professor = db.Professores.ToList();
+            List<String> lista_professor = new List<string>();
+            foreach (Professor prof in professor)
+            {
+                lista_professor.Add(prof.nome.ToString());
+            }
+            ViewBag.Professores = lista_professor;*/
+            //ViewBag.Professores = new SelectList(db.Professores, "Id", "nome");
             return View();
         }
 
@@ -46,13 +54,19 @@ namespace Sgtcc.Controllers
         // obter mais detalhes, consulte https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,titulo,Professor.nome")] Tcc tcc)
+        public ActionResult Create([Bind(Include = "Id,titulo,Orientador")] Tcc tcc)
         {
             if (ModelState.IsValid)
             {
+                var professor = db.Professores.Where(x => x.nome == tcc.Orientador).FirstOrDefault();
+                tcc.Professor = professor;
                 DateTime dataAtual = DateTime.Now;
                 tcc.semestre = (dataAtual.Month <= 6 ? 1 : 2).ToString();
                 tcc.ano = (dataAtual.Year).ToString();
+                int aux = (int)HttpContext.Session["userID"];
+                var aluno = db.Alunos.Where(x => x.Id == aux).FirstOrDefault();
+                tcc.Aluno = aluno;
+                tcc.status = "1";
                 db.Tccs.Add(tcc);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -81,10 +95,13 @@ namespace Sgtcc.Controllers
         // obter mais detalhes, consulte https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,titulo,semestre,ano,status")] Tcc tcc)
+        public ActionResult Edit([Bind(Include = "Id,titulo,Orientador")] Tcc tcc)
         {
             if (ModelState.IsValid)
             {
+
+                var professor = db.Professores.Where(x => x.nome == tcc.Orientador).FirstOrDefault();
+                tcc.Professor = professor;
                 db.Entry(tcc).State = System.Data.Entity.EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
