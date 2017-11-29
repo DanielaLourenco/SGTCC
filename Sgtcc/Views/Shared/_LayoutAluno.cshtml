@@ -71,7 +71,10 @@
                     <li>@Html.ActionLink("Buscar TCC", "../BuscaTccs", "Index")</li>
                     <li>@Html.ActionLink("Buscar Agendamento", "../Agendamento", "Index")</li>
                 </ul>
-                @Html.Partial("_LoginPartial")
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a> Bem vindo @Session["userName"].ToString()</a></li>
+                    <li><a href="@Url.Action("LogOut","Login")">LogOut</a></li>
+                </ul>
             </div>
         </div>
     </div>

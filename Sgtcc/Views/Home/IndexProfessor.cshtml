@@ -1,10 +1,15 @@
 ﻿@{
     ViewBag.Title = "Home Page";
+    Layout = "~/Views/Shared/_LayoutProfessor.cshtml";
+    if (Session["userID"] == null)
+    {
+        Response.Redirect("~/");
+    }
 }
 
 <div class="jumbotron">
     <h1>SGTCC</h1>
-    <p class="lead">Sistema de Gerenciamento de TCCs.</p>
+    <p class="lead">Sistema de Gerenciamento de TCCs. Index do Professor</p>
     <p><a href="Home/About" class="btn btn-primary btn-lg">Sobre o Sistema &raquo;</a></p>
 </div>
 
