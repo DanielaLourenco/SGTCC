@@ -331,10 +331,6 @@
       <LastGenOutput>Model3.cs</LastGenOutput>
       <DependentUpon>Model1.edmx</DependentUpon>
     </Content>
-    <Content Include="Rotativa\help-wkhtmltoimage.txt" />
-    <Content Include="Rotativa\help-wkhtmltopdf.txt" />
-    <Content Include="Rotativa\wkhtmltoimage.exe" />
-    <Content Include="Rotativa\wkhtmltopdf.exe" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
@@ -348,7 +344,6 @@
       <DependentUpon>Model1.edmx</DependentUpon>
     </Content>
     <Content Include="Grid.mvc.readme" />
-    <Content Include="App_Browsers\qt.browser" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\gridmvc.js" />
     <Content Include="Scripts\gridmvc.lang.ru.js" />
