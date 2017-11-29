@@ -6,6 +6,8 @@
 //     Manual changes to this file will be overwritten if the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Sgtcc.Models
 {
@@ -21,9 +23,13 @@ namespace Sgtcc.Models
         }
     
         public int Id { get; set; }
+        [Display(Name = "Título")]
         public string titulo { get; set; }
+        [Display(Name = "Semestre")]
         public string semestre { get; set; }
+        [Display(Name = "Ano")]
         public string ano { get; set; }
+        [Display(Name = "Status")]
         public string status { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
