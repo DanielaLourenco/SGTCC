@@ -22,11 +22,12 @@ namespace Sgtcc.Controllers
         [HttpPost]
         public ActionResult UploadFile(HttpPostedFileBase UploadedFile)
         {
+            int idAluno = (int)HttpContext.Session["userID"];
 
-            var dadosAluno = db.Alunos.Where((Sgtcc.Models.Aluno a) => a.Id == (int)HttpContext.Session["userID"]).FirstOrDefault();
-            if (dadosAluno.Tccs != null)
+            var dadosAluno = db.Alunos.Where((Sgtcc.Models.Aluno a) => a.Id == idAluno).First();
+            if (dadosAluno.Tccs.Count <= 0)
             {
-                return null;
+                return View();
             }
             else if (UploadedFile.ContentLength > 0)
             {
@@ -34,18 +35,18 @@ namespace Sgtcc.Controllers
                 string folderPath = Path.Combine(Server.MapPath("~/Arquivos"), fileName);
 
                 UploadedFile.SaveAs(folderPath);
-/*
+
                 Sgtcc.Models.Arquivo novoArquivo = new Sgtcc.Models.Arquivo();
 
                 novoArquivo.caminho = folderPath;
-                novoArquivo.extensao = Path.GetExtension(UploadedFile.FileName);
+                novoArquivo.extensao = Path.GetExtension(UploadedFile.FileName).ToString();
                 novoArquivo.nome = fileName;
-                novoArquivo.Id = rnd.Next(32);
-                novoArquivo.Tcc = null;
+               // novoArquivo.Id = rnd.Next(32);
+                novoArquivo.Tcc = dadosAluno.Tccs.FirstOrDefault();
 
                 db.Arquivoes.Add(novoArquivo);
                 db.SaveChanges();
-*/
+
             }
 
             ViewBag.Message = "Arquivo enviado com sucesso";

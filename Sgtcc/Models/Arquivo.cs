@@ -11,6 +11,7 @@ namespace Sgtcc.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     using System.Web;
 
     public partial class Arquivo
@@ -22,5 +23,7 @@ namespace Sgtcc.Models
         public string caminho { get; set; }
     
         public virtual Tcc Tcc { get; set; }
+
+        public string LoginErrorMessage { get; set; }
     }
 }

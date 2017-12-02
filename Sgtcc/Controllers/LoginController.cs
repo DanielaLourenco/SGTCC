@@ -23,7 +23,7 @@ namespace Sgtcc.Controllers
                 var usuarioModel = db.Usuarios.Where(x => x.cpf == userModel.cpf && x.senha == userModel.senha).FirstOrDefault();
                 if (usuarioModel == null)
                 {
-                    usuarioModel.LoginErrorMessage = "CPF ou senha inválidos";
+                    userModel.LoginErrorMessage = "CPF ou senha inválidos";
                     return View("Index", usuarioModel);
                 }
                 else if (db.Alunos.Where((Sgtcc.Models.Aluno a) => a.Id == usuarioModel.Id).FirstOrDefault() != null)
