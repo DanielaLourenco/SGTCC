@@ -8,6 +8,8 @@
 //------------------------------------------------------------------------------
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Web.Mvc;
 
 namespace Sgtcc.Models
 {
@@ -24,6 +26,7 @@ namespace Sgtcc.Models
 
         [Required]
         [Display(Name = "Matrícula")]
+        //[Index(IsUnique = true)]
         [RegularExpression("^[0-9]{12}$", ErrorMessage = "Matrícula must have 12 digits.")]
         public string matricula { get; set; }
     

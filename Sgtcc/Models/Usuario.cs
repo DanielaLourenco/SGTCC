@@ -25,7 +25,8 @@ namespace Sgtcc.Models
         public string nome { get; set; }
 
         [Required]
-        [Display(Name = "CPF")]      
+        [Display(Name = "CPF")]
+        //[Index(IsUnique = true)]
         [RegularExpression("^[0-9]{11}$", ErrorMessage = "CPF must have 11 digits.")]
         public string cpf { get; set; }
 

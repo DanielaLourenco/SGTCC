@@ -150,7 +150,7 @@ namespace Sgtcc.Controllers
             {
                 DateTime prazoInicio = Convert.ToDateTime(agenda.prazoInicial);
                 DateTime prazoFim = Convert.ToDateTime(agenda.prazoFinal);
-                if (DateTime.Compare(prazoInicio, dataAtual) < 0 && DateTime.Compare(dataAtual, prazoFim) > 0)
+                if (DateTime.Compare(prazoInicio, dataAtual) <=0 && DateTime.Compare(dataAtual, prazoFim) <= 0)
                 {
                     return agenda.prazoFinal.ToString();
                 }
@@ -166,8 +166,8 @@ namespace Sgtcc.Controllers
             foreach (CronogramaArquivo agendaSubmissao in submissaoList)
             {
                 DateTime prazoInicio = Convert.ToDateTime(agendaSubmissao.prazoInicial);
-                DateTime prazoFim = Convert.ToDateTime(agendaSubmissao.prazoFinal);
-                if (DateTime.Compare(prazoInicio, dataAtual) < 0 && DateTime.Compare(dataAtual, prazoFim) > 0)
+                DateTime prazoFim = Convert.ToDateTime(agendaSubmissao.prazoFinal);               
+                if (DateTime.Compare(prazoInicio, dataAtual) <= 0 && DateTime.Compare(dataAtual, prazoFim) <= 0)
                 {
                     return agendaSubmissao.prazoFinal.ToString();
                 }

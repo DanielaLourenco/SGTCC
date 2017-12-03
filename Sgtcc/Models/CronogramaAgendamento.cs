@@ -19,11 +19,13 @@ namespace Sgtcc.Models
         public int Id { get; set; }
 
         [Required]
+        [DataType(DataType.Date)]
         [Display(Name = "Prazo Final")]
         public string prazoInicial { get; set; }
 
 
         [Required]
+        [DataType(DataType.Date)]
         [Display(Name = "Prazo Final")]
         public string prazoFinal { get; set; }
     }
