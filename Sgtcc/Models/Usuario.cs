@@ -46,14 +46,7 @@ namespace Sgtcc.Models
         [RegularExpression("^(?=.{8,})(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=.?!]).*$", ErrorMessage = "Password must have at least 8 characters and a upper case, lower case and a special character.")]
         [DataType(DataType.Password)]        
         public string senha { get; set; }
-        /*
-        [NotMapped] // Nao afeta o banco
-        [Display(Name = "Confirmar Senha")]        
-        [Compare("senha",
-                    ErrorMessage = "The password and confirmation password do not match.")]
-        [DataType(DataType.Password)]
-        public string confirmPassword { get; set; }
-        */
+       
         public string LoginErrorMessage { get; set; }
     }
 }

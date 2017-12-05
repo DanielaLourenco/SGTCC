@@ -20,28 +20,28 @@ namespace Sgtcc.Controllers
         {
             using (Model1Container db = new Model1Container())
             {
-                var usuarioModel = db.Usuarios.Where(x => x.cpf == userModel.cpf && x.senha == userModel.senha).FirstOrDefault();
-                if (usuarioModel == null)
+                var userDetails = db.Usuarios.Where(x => x.cpf == userModel.cpf && x.senha == userModel.senha).FirstOrDefault();
+                if (userDetails == null)
                 {
                     userModel.LoginErrorMessage = "CPF ou senha inválidos";
-                    return View("Index", usuarioModel);
+                    return View("Index", userModel);
                 }
-                else if (db.Alunos.Where((Sgtcc.Models.Aluno a) => a.Id == usuarioModel.Id).FirstOrDefault() != null)
+                else if (db.Alunos.Where((Sgtcc.Models.Aluno a) => a.Id == userDetails.Id).FirstOrDefault() != null)
                 {   // aluno
-                    Session["userID"] = usuarioModel.Id;
-                    Session["userName"] = usuarioModel.nome;
+                    Session["userID"] = userDetails.Id;
+                    Session["userName"] = userDetails.nome;
                     return RedirectToAction("IndexAluno", "Home");
                 }
-                else if (db.Professores.Where((Sgtcc.Models.Professor p) => p.Id == usuarioModel.Id).FirstOrDefault() != null)
+                else if (db.Professores.Where((Sgtcc.Models.Professor p) => p.Id == userDetails.Id).FirstOrDefault() != null)
                 {   // professor
-                    Session["userID"] = usuarioModel.Id;
-                    Session["userName"] = usuarioModel.nome;
+                    Session["userID"] = userDetails.Id;
+                    Session["userName"] = userDetails.nome;
                     return RedirectToAction("IndexProfessor", "Home");
                 }
                 else
                 {   // admin
-                    Session["userID"] = usuarioModel.Id;
-                    Session["userName"] = usuarioModel.nome;
+                    Session["userID"] = userDetails.Id;
+                    Session["userName"] = userDetails.nome;
                     return RedirectToAction("IndexAdmin", "Home");
                 }
             }
