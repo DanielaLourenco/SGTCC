@@ -96,11 +96,11 @@ namespace Sgtcc.Controllers
         // obter mais detalhes, consulte https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,titulo,Orientador,ano,semestre,status")] Tcc tcc)
+        public ActionResult Edit([Bind(Include = "Id,titulo,Orientador,Aluno, Professor,ano,semestre,status")] Tcc tcc)
         {
-            if (ModelState.IsValid)
-            {
-                //db.Entry(tcc).State = System.Data.Entity.EntityState.Modified;
+            //if (ModelState.IsValid)
+            //{
+                db.Entry(tcc).State = System.Data.Entity.EntityState.Modified;
                 var professor = db.Professores.Where(x => x.nome == tcc.Orientador).FirstOrDefault();
                 tcc.Professor = professor;
                 int aux = (int)HttpContext.Session["userID"];
@@ -108,7 +108,7 @@ namespace Sgtcc.Controllers
                 tcc.Aluno = aluno;
                 db.SaveChanges();
                 return RedirectToAction("Index");
-            }
+            //}
             return View(tcc);
         }
 
