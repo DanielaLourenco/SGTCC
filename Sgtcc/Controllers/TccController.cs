@@ -1,12 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using Sgtcc.Models;
+using System.Collections.Generic;
+
 
 namespace Sgtcc.Controllers
 {
@@ -38,14 +37,7 @@ namespace Sgtcc.Controllers
         // GET: Tcc/Create
         public ActionResult Create()
         {
-            /*var professor = db.Professores.ToList();
-            List<String> lista_professor = new List<string>();
-            foreach (Professor prof in professor)
-            {
-                lista_professor.Add(prof.nome.ToString());
-            }
-            ViewBag.Professores = lista_professor;*/
-            //ViewBag.Professores = new SelectList(db.Professores, "Id", "nome");
+            ViewBag.Professores = new SelectList(db.Professores, "Id","nome");
             return View();
         }
 
@@ -58,7 +50,8 @@ namespace Sgtcc.Controllers
         {
             if (ModelState.IsValid)
             {
-                var professor = db.Professores.Where(x => x.nome == tcc.Orientador).FirstOrDefault();
+                int orientador = Int32.Parse(tcc.Orientador);
+                var professor = db.Professores.Where(x => x.Id == orientador).FirstOrDefault();
                 tcc.Professor = professor;
                 DateTime dataAtual = DateTime.Now;
                 tcc.semestre = (dataAtual.Month <= 6 ? 1 : 2).ToString();
@@ -78,6 +71,7 @@ namespace Sgtcc.Controllers
         // GET: Tcc/Edit/5
         public ActionResult Edit(int? id)
         {
+            //ViewBag.Professores = new SelectList(db.Professores, "Id", "nome");
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -87,6 +81,13 @@ namespace Sgtcc.Controllers
             {
                 return HttpNotFound();
             }
+            /*var professor = db.Professores.ToList();
+            List<string> lista_professor = new List<string>();
+            foreach (Professor prof in professor)
+            {
+                lista_professor.Add(prof.nome.ToString());
+            }
+            ViewBag.Professores = lista_professor;*/
             return View(tcc);
         }
 
@@ -95,14 +96,16 @@ namespace Sgtcc.Controllers
         // obter mais detalhes, consulte https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,titulo,Orientador")] Tcc tcc)
+        public ActionResult Edit([Bind(Include = "Id,titulo,Orientador,ano,semestre,status")] Tcc tcc)
         {
             if (ModelState.IsValid)
             {
-
+                //db.Entry(tcc).State = System.Data.Entity.EntityState.Modified;
                 var professor = db.Professores.Where(x => x.nome == tcc.Orientador).FirstOrDefault();
                 tcc.Professor = professor;
-                db.Entry(tcc).State = System.Data.Entity.EntityState.Modified;
+                int aux = (int)HttpContext.Session["userID"];
+                var aluno = db.Alunos.Where(x => x.Id == aux).FirstOrDefault();
+                tcc.Aluno = aluno;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

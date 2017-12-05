@@ -16,6 +16,9 @@
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.Id)
+        @Html.HiddenFor(model => model.ano)
+        @Html.HiddenFor(model => model.semestre)
+        @Html.HiddenFor(model => model.status)
 
         <div class="form-group">
             @Html.LabelFor(model => model.titulo, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -28,7 +31,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Orientador, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @*@Html.EditorFor(model => model.Professor.nome, new { htmlAttributes = new { @class = "form-control", @Name = "Orientador", @Placeholder = "Orientador" } })*@
+                @*Html.DropDownList("nome", ViewBag.Professores as SelectList)*@
                 @Html.EditorFor(model => model.Orientador, new { htmlAttributes = new { @class = "form-control", @Placeholder = "Orientador" } })
                 @Html.ValidationMessageFor(model => model.Orientador, "", new { @class = "text-danger" })
             </div>
