@@ -2,6 +2,11 @@
 
 @{
     ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_LayoutAluno.cshtml";
+    if (HttpContext.Current.Session["UserId"] == null)
+    {
+        Response.Redirect("~/");
+    }
 }
 
 <h2>Edit</h2>
