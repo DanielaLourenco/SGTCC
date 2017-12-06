@@ -15,9 +15,9 @@ namespace Sgtcc.Controllers
         private Model1Container db = new Model1Container();
 
         // GET: Alunos
-        public ActionResult Index()
+        public ActionResult Index(int? id)
         {
-            return View(db.Alunos.ToList());
+            return View(db.Alunos.Where(x => x.Id == id));
         }
 
         // GET: Alunos/Details/5

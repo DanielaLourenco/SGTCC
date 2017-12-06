@@ -21,6 +21,8 @@
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.Id)
+        @Html.HiddenFor(model => model.Aluno)
+        @Html.HiddenFor(model => model.Professor)
         @Html.HiddenFor(model => model.ano)
         @Html.HiddenFor(model => model.semestre)
         @Html.HiddenFor(model => model.status)

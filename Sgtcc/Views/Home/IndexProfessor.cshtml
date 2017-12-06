@@ -1,7 +1,7 @@
 ﻿@{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "Professor Page";
     Layout = "~/Views/Shared/_LayoutProfessor.cshtml";
-    if (Session["userID"] == null)
+    if (HttpContext.Current.Session["UserId"] == null)
     {
         Response.Redirect("~/");
     }
@@ -11,22 +11,4 @@
     <h1>SGTCC</h1>
     <p class="lead">Sistema de Gerenciamento de TCCs. Index do Professor</p>
     <p><a href="Home/About" class="btn btn-primary btn-lg">Sobre o Sistema &raquo;</a></p>
-</div>
-
-<div class="row">
-    <div class="col-md-4">
-        <h2>Log in</h2>
-        <p>Acesse o sistema com uma conta existente.</p>
-        <p><a class="btn btn-default" href="Login/Index">Log in &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Cadastrar Novo Aluno</h2>
-        <p>Cadastro de alunos de TCC.</p>
-        <p><a class="btn btn-default" href="Alunos/Create">Cadastrar Aluno &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Cadastrar Novo Professor</h2>
-        <p>Cadastro de professores do CEFET-MG e visitantes</p>
-        <p><a class="btn btn-default" href="Professores/Create">Cadastrar Professor &raquo;</a></p>
-    </div>
 </div>

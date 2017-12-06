@@ -2,6 +2,14 @@
 
 @{
     ViewBag.Title = "Index";
+    @{
+        ViewBag.Title = "Index";
+        Layout = "~/Views/Shared/_LayoutProfessor.cshtml";
+        if (HttpContext.Current.Session["UserId"] == null)
+        {
+            Response.Redirect("~/");
+        }
+    }
 }
 
 <h2>Index</h2>
