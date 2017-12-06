@@ -86,6 +86,7 @@ namespace Sgtcc.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.Professores = new SelectList(db.Professores, "Id", "nome");
             return View(tcc2);
         }
 
@@ -94,12 +95,22 @@ namespace Sgtcc.Controllers
         // obter mais detalhes, consulte https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,titulo,semestre,ano,status,data,local")] Tcc2 tcc2)
+        public ActionResult Edit(Sgtcc.Models.Tcc2 tcc2)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(tcc2).State = System.Data.Entity.EntityState.Modified;
+                var tcc = db.Tccs2.Where(x => x.Id == tcc2.Id).FirstOrDefault();
+              
+                int orientador = Int32.Parse(tcc2.Orientador);
+                var professor = db.Professores.Where(x => x.Id == orientador).FirstOrDefault();
+                tcc.Professor = professor;
+                tcc.titulo = tcc2.titulo;
+
+
+                
                 db.SaveChanges();
+               // db.Entry(tcc2).State = System.Data.Entity.EntityState.Modified;
+                //db.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View(tcc2);

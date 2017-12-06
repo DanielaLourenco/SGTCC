@@ -18,9 +18,6 @@ namespace Sgtcc.Models
     {
         public string data { get; set; }
         public string local { get; set; }
-        [Display(Name = "Orientador")]
-        [DataType(DataType.Text)]
-        public string Orientador { get; set; }
         public virtual Banca Banca { get; set; }
     }
 }
