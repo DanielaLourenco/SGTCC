@@ -67,7 +67,7 @@ namespace Sgtcc.Controllers
             var tcc = db.Tccs2.Where(x => x.Aluno.Id == idUsuario).FirstOrDefault();
             if (tcc != null)
             {
-                return View("Index");
+                return RedirectToAction("Index");
             }
             ViewBag.Professores = new SelectList(db.Professores, "Id", "nome");
             return View();

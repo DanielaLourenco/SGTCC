@@ -32,6 +32,21 @@ namespace Sgtcc.Controllers
             {
                 return HttpNotFound();
             }
+            switch (tcc.status)
+            {
+                case "1":
+                    tcc.situação = "Cadastrado";
+                    break;
+                case "2":
+                    tcc.situação = "Aprovado";
+                    break;
+                case "3":
+                    tcc.situação = "Reprovado";
+                    break;
+                case "4":
+                    tcc.situação = "Cancelado";
+                    break;
+            }
             return View(tcc);
         }
 

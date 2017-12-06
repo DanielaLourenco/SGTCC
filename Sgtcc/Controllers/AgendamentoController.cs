@@ -57,7 +57,7 @@ namespace Sgtcc.Controllers
             int pageSize = 10;
             int pageNumber = (page ?? 1);
             return View(db.Tccs2.ToPagedList(pageNumber, pageSize));*/
-            return View(db.Tccs2.ToList());
+            return View(db.Tccs2.Where(x=> x.data != "" && x.local != "").ToList());
         }
 
         // GET: Agendamento/Details/5

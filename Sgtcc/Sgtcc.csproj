@@ -220,6 +220,7 @@
     <Compile Include="Controllers\NotificacoesController.cs" />
     <Compile Include="Controllers\ProfessoresController.cs" />
     <Compile Include="Controllers\BuscaTccsController.cs" />
+    <Compile Include="Controllers\Relatorio.cs" />
     <Compile Include="Controllers\Tcc2Controller.cs" />
     <Compile Include="Controllers\TccController.cs" />
     <Compile Include="Controllers\UsuariosController.cs" />
@@ -1029,6 +1030,8 @@
     <Content Include="Views\Notificacoes\Index.cshtml" />
     <Content Include="Views\Tcc2\Agendamento.cshtml" />
     <Content Include="Views\Arquivo\Envio.cshtml" />
+    <Content Include="Views\Relatorio\Index.cshtml" />
+    <Content Include="Views\Relatorio\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,0 +1,100 @@
+﻿@model IEnumerable<Sgtcc.Models.Tcc>
+@using GridMvc.Html
+
+@{
+    ViewBag.Title = "Index";
+    Sgtcc.Models.Model1Container db = new Sgtcc.Models.Model1Container();
+
+    int currentId = (int)HttpContext.Current.Session["UserId"];
+
+    if (db.Professores.Where((Sgtcc.Models.Professor p) => p.Id == currentId).FirstOrDefault() != null)
+    {
+        Layout = "~/Views/Shared/_LayoutProfessor.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    }
+}
+
+@section css {
+    <link href="@Url.Content("~/Content/Gridmvc.css")" rel="stylesheet" type="text/css" />
+}
+
+<h2>Index</h2>
+
+<div class="form-group">
+    <img src="@Url.Action("ChartPie1")" alt="Chart" />
+</div>
+
+<div class="form-group">
+    <img src="@Url.Action("ChartPie2")" alt="Chart" />
+</div>
+
+<link href="@Url.Content("~/Content/Gridmvc.css")" rel="stylesheet" type="text/css" />
+<link href="@Url.Content("~/Content/bootstrap.min.css")" rel="stylesheet" type="text/css" />
+<script src="@Url.Content("~/Scripts/jquery-1.9.1.min.js")"></script>
+<script src="@Url.Content("~/Scripts/gridmvc.min.js")"></script>
+
+<div>
+    @Html.Grid(Model).Columns(columns =>
+{
+    columns.Add(c => c.Aluno.nome).Titled("Aluno").Filterable(true);
+    columns.Add(c => c.titulo).Titled("Título").Filterable(true);
+    columns.Add(c => c.Professor.nome).Titled("Professor").Filterable(true);
+    columns.Add(c => c.ano).Titled("Ano").Filterable(true);
+    columns.Add(c => c.semestre).Titled("Semestre").Filterable(true);
+    columns.Add()
+    .Encoded(false)
+    .Sanitized(false)
+    .SetWidth(30)
+    .RenderValueAs(o => Html.ActionLink("Details", "Details", new { id = o.Id }));
+
+}).WithPaging(10).Sortable(true).Filterable(true).WithMultipleFilters()
+</div>
+
+@section Scripts {
+    <script src="@Url.Content("~/Scripts/gridmvc.min.js")" type="text/javascript"> </script>
+}
+
+@*
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.titulo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.semestre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ano)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.status)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.titulo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.semestre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ano)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.status)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>*@
