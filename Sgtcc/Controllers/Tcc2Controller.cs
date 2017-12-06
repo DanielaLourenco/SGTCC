@@ -18,6 +18,15 @@ namespace Sgtcc.Controllers
         public ActionResult Index()
         {
             int idUsuario = (int)HttpContext.Session["userID"];
+            var tcc = db.Tccs2.Where(x => x.Aluno.Id == idUsuario).FirstOrDefault();
+            if (tcc == null)
+            {
+                ViewBag.Existe = 0;
+            }
+            else
+            {
+                ViewBag.Existe = 1;
+            }
             return View(db.Tccs2.Where(x => x.Aluno.Id == idUsuario));
         }
 
@@ -33,12 +42,33 @@ namespace Sgtcc.Controllers
             {
                 return HttpNotFound();
             }
+            switch (tcc2.status)
+            {
+                case "5":
+                    tcc2.situação = "Cadastrado";
+                    break;
+                case "6":
+                    tcc2.situação = "Aprovado";
+                    break;
+                case "7":
+                    tcc2.situação = "Reprovado";
+                    break;
+                case "8":
+                    tcc2.situação = "Cancelado";
+                    break;
+            }
             return View(tcc2);
         }
 
         // GET: Tcc2/Create
         public ActionResult Create()
         {
+            int idUsuario = (int)HttpContext.Session["userID"];
+            var tcc = db.Tccs2.Where(x => x.Aluno.Id == idUsuario).FirstOrDefault();
+            if (tcc != null)
+            {
+                return View("Index");
+            }
             ViewBag.Professores = new SelectList(db.Professores, "Id", "nome");
             return View();
         }
@@ -61,7 +91,8 @@ namespace Sgtcc.Controllers
                 int aux = (int)HttpContext.Session["userID"];
                 var aluno = db.Alunos.Where(x => x.Id == aux).FirstOrDefault();
                 tcc2.Aluno = aluno;
-                tcc2.status = "1";
+                tcc2.status = "5";
+                tcc2.situação = "Cadastrado";
                 tcc2.data = "";
                 tcc2.local = "";
                 //Banca default - sempre vazia
@@ -118,6 +149,7 @@ namespace Sgtcc.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Tcc2 tcc2 = db.Tccs2.Find(id);
+            tcc2.Orientador = tcc2.Professor.nome;
             if (tcc2 == null)
             {
                 return HttpNotFound();

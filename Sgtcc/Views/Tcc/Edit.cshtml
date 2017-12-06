@@ -2,10 +2,27 @@
 
 @{
     ViewBag.Title = "Edit";
-    Layout = "~/Views/Shared/_LayoutAluno.cshtml";
+
     if (HttpContext.Current.Session["UserId"] == null)
     {
         Response.Redirect("~/");
+    }
+
+    Sgtcc.Models.Model1Container db = new Sgtcc.Models.Model1Container();
+
+    int currentId = (int)HttpContext.Current.Session["UserId"];
+
+    if (db.Alunos.Where((Sgtcc.Models.Aluno a) => a.Id == currentId).FirstOrDefault() != null)
+    {
+        Layout = "~/Views/Shared/_LayoutAluno.cshtml";
+    }
+    else if (db.Professores.Where((Sgtcc.Models.Professor p) => p.Id == currentId).FirstOrDefault() != null)
+    {
+        Layout = "~/Views/Shared/_LayoutProfessor.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
     }
 }
 
@@ -21,11 +38,6 @@
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.Id)
-        @Html.HiddenFor(model => model.Aluno)
-        @Html.HiddenFor(model => model.Professor)
-        @Html.HiddenFor(model => model.ano)
-        @Html.HiddenFor(model => model.semestre)
-        @Html.HiddenFor(model => model.status)
 
         <div class="form-group">
             @Html.LabelFor(model => model.titulo, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -38,8 +50,8 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Orientador, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @*Html.DropDownList("nome", ViewBag.Professores as SelectList)*@
-                @Html.EditorFor(model => model.Orientador, new { htmlAttributes = new { @class = "form-control", @Placeholder = "Orientador" } })
+                @Html.DropDownList("Orientador", ViewBag.Professores as SelectList)
+                @*@Html.EditorFor(model => model.Orientador, new { htmlAttributes = new { @class = "form-control", @Placeholder = "Orientador" } })*@
                 @Html.ValidationMessageFor(model => model.Orientador, "", new { @class = "text-danger" })
             </div>
         </div>

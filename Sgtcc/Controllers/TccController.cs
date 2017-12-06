@@ -17,7 +17,16 @@ namespace Sgtcc.Controllers
         public ActionResult Index()
         {
             int idUsuario = (int)HttpContext.Session["userID"];
-            return View(db.Tccs.Where(x => x.Aluno.Id == idUsuario));
+            var tcc = db.Tccs.Where(x => x.Aluno.Id == idUsuario).FirstOrDefault();
+            if (tcc == null)
+            {
+                ViewBag.Existe = 0;
+            }
+            else
+            {
+                ViewBag.Existe = 1;
+            }
+            return View(db.Tccs.Where(x => x.Aluno.Id == idUsuario && x.status != "5" && x.status != "6" && x.status != "7" && x.status != "8"));
         }
 
         // GET: Tcc/Details/5
@@ -32,13 +41,34 @@ namespace Sgtcc.Controllers
             {
                 return HttpNotFound();
             }
+            switch (tcc.status)
+            {
+                case "1":
+                    tcc.situação = "Cadastrado";
+                    break;
+                case "2":
+                    tcc.situação = "Aprovado";
+                    break;
+                case "3":
+                    tcc.situação = "Reprovado";
+                    break;
+                case "4":
+                    tcc.situação = "Cancelado";
+                    break;
+            }
             return View(tcc);
         }
 
         // GET: Tcc/Create
         public ActionResult Create()
         {
-            ViewBag.Professores = new SelectList(db.Professores, "Id","nome");
+            int idUsuario = (int)HttpContext.Session["userID"];
+            var tcc = db.Tccs.Where(x => x.Aluno.Id == idUsuario).FirstOrDefault();
+            if (tcc != null)
+            {
+                return View("Index");
+            }
+                ViewBag.Professores = new SelectList(db.Professores, "Id", "nome");
             return View();
         }
 
@@ -61,6 +91,7 @@ namespace Sgtcc.Controllers
                 var aluno = db.Alunos.Where(x => x.Id == aux).FirstOrDefault();
                 tcc.Aluno = aluno;
                 tcc.status = "1";
+                tcc.situação = "Cadastrado";
                 db.Tccs.Add(tcc);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -72,23 +103,18 @@ namespace Sgtcc.Controllers
         // GET: Tcc/Edit/5
         public ActionResult Edit(int? id)
         {
-            //ViewBag.Professores = new SelectList(db.Professores, "Id", "nome");
+            ViewBag.Professores = new SelectList(db.Professores, "Id", "nome");
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Tcc tcc = db.Tccs.Find(id);
+            tcc.Orientador = tcc.Professor.nome;
             if (tcc == null)
             {
                 return HttpNotFound();
             }
-            /*var professor = db.Professores.ToList();
-            List<string> lista_professor = new List<string>();
-            foreach (Professor prof in professor)
-            {
-                lista_professor.Add(prof.nome.ToString());
-            }
-            ViewBag.Professores = lista_professor;*/
+
             return View(tcc);
         }
 
@@ -97,19 +123,16 @@ namespace Sgtcc.Controllers
         // obter mais detalhes, consulte https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,titulo,Orientador,Aluno, Professor,ano,semestre,status")] Tcc tcc)
+        public ActionResult Edit(Sgtcc.Models.Tcc tcc)
         {
-            //if (ModelState.IsValid)
-            //{
-                db.Entry(tcc).State = System.Data.Entity.EntityState.Modified;
-                var professor = db.Professores.Where(x => x.nome == tcc.Orientador).FirstOrDefault();
+            if (ModelState.IsValid)
+            {
+                int orientador = Int32.Parse(tcc.Orientador);
+                var professor = db.Professores.Where(x => x.Id == orientador).FirstOrDefault();
                 tcc.Professor = professor;
-                int aux = (int)HttpContext.Session["userID"];
-                var aluno = db.Alunos.Where(x => x.Id == aux).FirstOrDefault();
-                tcc.Aluno = aluno;
                 db.SaveChanges();
                 return RedirectToAction("Index");
-            //}
+            }
             return View(tcc);
         }
 

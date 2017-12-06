@@ -33,6 +33,22 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
+            @Html.DisplayNameFor(model => model.Aluno.nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Aluno.nome)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Orientador")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Professor.nome)
+        </dd>
+
+        <dt>
             @Html.DisplayNameFor(model => model.titulo)
         </dt>
 
@@ -57,11 +73,11 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.status)
+            @Html.DisplayNameFor(model => model.situação)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.status)
+            @Html.DisplayFor(model => model.situação)
         </dd>
 
         <dt>
