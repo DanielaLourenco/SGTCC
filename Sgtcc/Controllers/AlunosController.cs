@@ -84,7 +84,7 @@ namespace Sgtcc.Controllers
             {
                 db.Entry(aluno).State = System.Data.Entity.EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("IndexAluno", "Home");
             }
             return View(aluno);
         }

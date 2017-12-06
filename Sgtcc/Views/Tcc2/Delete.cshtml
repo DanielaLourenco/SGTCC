@@ -2,10 +2,27 @@
 
 @{
     ViewBag.Title = "Delete";
-    Layout = "~/Views/Shared/_LayoutProfessor.cshtml";
+
     if (HttpContext.Current.Session["UserId"] == null)
     {
         Response.Redirect("~/");
+    }
+
+    Sgtcc.Models.Model1Container db = new Sgtcc.Models.Model1Container();
+
+    int currentId = (int)HttpContext.Current.Session["UserId"];
+
+    if (db.Alunos.Where((Sgtcc.Models.Aluno a) => a.Id == currentId).FirstOrDefault() != null)
+    {
+        Layout = "~/Views/Shared/_LayoutAluno.cshtml";
+    }
+    else if (db.Professores.Where((Sgtcc.Models.Professor p) => p.Id == currentId).FirstOrDefault() != null)
+    {
+        Layout = "~/Views/Shared/_LayoutProfessor.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
     }
 }
 
