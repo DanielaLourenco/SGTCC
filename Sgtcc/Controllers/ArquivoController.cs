@@ -11,24 +11,37 @@ namespace Sgtcc.Controllers
     public class ArquivoController : Controller
     {
         private Model1Container db = new Model1Container();
-        Random rnd = new Random();
+
+        // GET: Arquivo
+        public ActionResult Envio()
+        {
+            return View("Envio");
+        }
 
         // GET: Arquivo
         public ActionResult Index()
         {
-            return View();
+            return View("Index");
         }
 
         [HttpPost]
         public ActionResult UploadFile(HttpPostedFileBase UploadedFile)
         {
             int idAluno = (int)HttpContext.Session["userID"];
-
             var dadosAluno = db.Alunos.Where((Sgtcc.Models.Aluno a) => a.Id == idAluno).First();
-            if (dadosAluno.Tccs.Count <= 0)
+
+            if (UploadedFile == null)
             {
-                return View();
+                ViewBag.Message = "Nenhum arquivo selecionado";
+                return View("Index");
             }
+
+            if (dadosAluno.Tccs.Count > 0)
+            {
+                ViewBag.Message = "Um arquivo de TCC já foi submetido";
+                return View("Index");
+            }
+          
             else if (UploadedFile.ContentLength > 0)
             {
                 string fileName = Path.GetFileName(UploadedFile.FileName);
@@ -41,13 +54,12 @@ namespace Sgtcc.Controllers
                 novoArquivo.caminho = folderPath;
                 novoArquivo.extensao = Path.GetExtension(UploadedFile.FileName).ToString();
                 novoArquivo.nome = fileName;
-               // novoArquivo.Id = rnd.Next(32);
                 novoArquivo.Tcc = dadosAluno.Tccs.FirstOrDefault();
 
                 db.Arquivoes.Add(novoArquivo);
                 db.SaveChanges();
 
-            }
+            } 
 
             ViewBag.Message = "Arquivo enviado com sucesso";
 
