@@ -1,7 +1,7 @@
 ﻿@model Sgtcc.Models.Tcc2
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Agendamento";
 
     if (HttpContext.Current.Session["UserId"] == null)
     {
@@ -26,52 +26,37 @@
     }
 }
 
-<h2>Create</h2>
+<h2>Agendar</h2>
 
 
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>Tcc2</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Id)
+
         <div class="form-group">
-            @Html.LabelFor(model => model.titulo, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.data, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.titulo, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.titulo, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.data, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.data, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.semestre, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.local, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.semestre, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.semestre, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.local, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.local, "", new { @class = "text-danger" })
             </div>
         </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.ano, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ano, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ano, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.status, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.status, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.status, "", new { @class = "text-danger" })
-            </div>
-        </div>       
-
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Save" class="btn btn-default" />
             </div>
         </div>
     </div>
@@ -84,3 +69,5 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
+
+

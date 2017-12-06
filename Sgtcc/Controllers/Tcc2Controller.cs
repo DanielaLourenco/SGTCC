@@ -74,6 +74,42 @@ namespace Sgtcc.Controllers
             return View(tcc2);
         }
 
+        public ActionResult Agendamento(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Tcc2 tcc2 = db.Tccs2.Where(x => x.Aluno.Id == id).FirstOrDefault();
+           
+            if (tcc2 == null)
+            {
+                return HttpNotFound();
+            }           
+            return View(tcc2);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Agendamento(Sgtcc.Models.Tcc2 tcc2)
+        {
+            if (tcc2.data!=null && tcc2.local!= null)
+            {
+                Tcc2 tcc = db.Tccs2.Where(x => x.Aluno.Id == tcc2.Id).FirstOrDefault();
+                if (tcc != null) {
+                    tcc.data = tcc2.data;
+                    tcc.local = tcc2.local;
+                    //Banca default - sempre vazia
+                    tcc.Banca = db.Bancas.Where(x => x.Id == 3).FirstOrDefault();
+
+                    db.SaveChanges();
+                }
+                
+                return RedirectToAction("Index");
+            }
+            return View(tcc2);
+        }
+        
         // GET: Tcc2/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -105,12 +141,9 @@ namespace Sgtcc.Controllers
                 var professor = db.Professores.Where(x => x.Id == orientador).FirstOrDefault();
                 tcc.Professor = professor;
                 tcc.titulo = tcc2.titulo;
-
-
-                
+                                
                 db.SaveChanges();
-               // db.Entry(tcc2).State = System.Data.Entity.EntityState.Modified;
-                //db.SaveChanges();
+               
                 return RedirectToAction("Index");
             }
             return View(tcc2);

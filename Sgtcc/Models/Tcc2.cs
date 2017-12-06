@@ -16,8 +16,14 @@ namespace Sgtcc.Models
     
     public partial class Tcc2 : Tcc
     {
+        [DataType(DataType.Date)]
+        [Display(Name = "Data")]
         public string data { get; set; }
+        [Display(Name = "Local")]
         public string local { get; set; }
         public virtual Banca Banca { get; set; }
+
+        [Display(Name = "Professores Avaliadores")]
+        public string professoresBanca { get; set; }
     }
 }
