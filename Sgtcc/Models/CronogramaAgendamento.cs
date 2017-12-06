@@ -20,7 +20,7 @@ namespace Sgtcc.Models
 
         [Required]
         [DataType(DataType.Date)]
-        [Display(Name = "Prazo Final")]
+        [Display(Name = "Prazo Inicial")]
         public string prazoInicial { get; set; }
 
 
