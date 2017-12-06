@@ -1027,6 +1027,7 @@
     <Content Include="Views\Home\IndexAdmin.cshtml" />
     <Content Include="Views\Shared\_LayoutAdmin.cshtml" />
     <Content Include="Views\Notificacoes\Index.cshtml" />
+    <Content Include="Views\Tcc2\Agendamento.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

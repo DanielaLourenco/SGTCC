@@ -21,48 +21,16 @@
                 @Html.EditorFor(model => model.titulo, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.titulo, "", new { @class = "text-danger" })
             </div>
-        </div>
+        </div>    
 
         <div class="form-group">
-            @Html.LabelFor(model => model.semestre, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Orientador, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.semestre, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.semestre, "", new { @class = "text-danger" })
+                @Html.DropDownList("Orientador", ViewBag.Professores as SelectList)
+                @*@Html.EditorFor(model => model.Orientador, new { htmlAttributes = new { @class = "form-control", @Placeholder = "Orientador" } })*@
+                @Html.ValidationMessageFor(model => model.Orientador, "", new { @class = "text-danger" })
             </div>
         </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.ano, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ano, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ano, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.status, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.status, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.status, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.data, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.data, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.data, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.local, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.local, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.local, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Create" class="btn btn-default" />

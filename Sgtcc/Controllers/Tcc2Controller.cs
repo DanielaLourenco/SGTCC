@@ -17,7 +17,8 @@ namespace Sgtcc.Controllers
         // GET: Tcc2
         public ActionResult Index()
         {
-            return View(db.Tccs2.ToList());
+            int idUsuario = (int)HttpContext.Session["userID"];
+            return View(db.Tccs2.Where(x => x.Aluno.Id == idUsuario));
         }
 
         // GET: Tcc2/Details/5
@@ -38,6 +39,7 @@ namespace Sgtcc.Controllers
         // GET: Tcc2/Create
         public ActionResult Create()
         {
+            ViewBag.Professores = new SelectList(db.Professores, "Id", "nome");
             return View();
         }
 
@@ -46,10 +48,24 @@ namespace Sgtcc.Controllers
         // obter mais detalhes, consulte https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,titulo,semestre,ano,status,data,local")] Tcc2 tcc2)
+        public ActionResult Create(Sgtcc.Models.Tcc2 tcc2)
         {
             if (ModelState.IsValid)
             {
+                int orientador = Int32.Parse(tcc2.Orientador);
+                var professor = db.Professores.Where(x => x.Id == orientador).FirstOrDefault();
+                tcc2.Professor = professor;
+                DateTime dataAtual = DateTime.Now;
+                tcc2.semestre = (dataAtual.Month <= 6 ? 1 : 2).ToString();
+                tcc2.ano = (dataAtual.Year).ToString();
+                int aux = (int)HttpContext.Session["userID"];
+                var aluno = db.Alunos.Where(x => x.Id == aux).FirstOrDefault();
+                tcc2.Aluno = aluno;
+                tcc2.status = "1";
+                tcc2.data = "";
+                tcc2.local = "";
+                //Banca default - sempre vazia
+                tcc2.Banca = db.Bancas.Where(x => x.Id == 3).FirstOrDefault();
                 db.Tccs2.Add(tcc2);
                 db.SaveChanges();
                 return RedirectToAction("Index");
