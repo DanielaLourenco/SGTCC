@@ -55,19 +55,12 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("SGTCC", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("SGTCC", "IndexProfessor", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    @*<li>@Html.ActionLink("Sobre", "About", "Home")</li>
-                        <li>@Html.ActionLink("Contato", "Contact", "Home")</li>*@
-                    <li>@Html.ActionLink("Usuário", "../Usuarios", "Index")</li>
-                    <li>@Html.ActionLink("Aluno", "../Alunos", "Index")</li>
-                    <li>@Html.ActionLink("Professor", "../Professores", "Index")</li>
                     <li>@Html.ActionLink("TCC 1", "../Tcc", "Index")</li>
                     <li>@Html.ActionLink("TCC 2", "../Tcc2", "Index")</li>
-                    @*<li>@Html.ActionLink("Cronograma de Submissão", "../CronogramaArquivos", "Index")</li>
-                        <li>@Html.ActionLink("Cronograma de Agendamento", "../CronogramaAgendamentos", "Index")</li>*@
                     <li>@Html.ActionLink("Buscar TCC", "../BuscaTccs", "Index")</li>
                     <li>@Html.ActionLink("Buscar Agendamento", "../Agendamento", "Index")</li>
                 </ul>

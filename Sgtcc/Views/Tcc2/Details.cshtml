@@ -2,6 +2,11 @@
 
 @{
     ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_LayoutProfessor.cshtml";
+    if (HttpContext.Current.Session["UserId"] == null)
+    {
+        Response.Redirect("~/");
+    }
 }
 
 <h2>Details</h2>
