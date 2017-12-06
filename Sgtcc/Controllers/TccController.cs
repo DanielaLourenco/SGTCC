@@ -16,7 +16,8 @@ namespace Sgtcc.Controllers
         // GET: Tcc
         public ActionResult Index()
         {
-            return View(db.Tccs.ToList());
+            int idUsuario = (int)HttpContext.Session["userID"];
+            return View(db.Tccs.Where(x => x.Aluno.Id == idUsuario));
         }
 
         // GET: Tcc/Details/5
